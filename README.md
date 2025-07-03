@@ -1,5 +1,8 @@
 # Rest - Hourly Exercise Reminder Service
 
+> **⚠️ AI-Generated Project Alert**  
+> This entire application was created by **Claude (Anthropic's AI assistant)** from scratch! From the initial concept and code implementation to the PM2 configuration and this very README you're reading. Just goes to show what's possible when you ask an AI to help solve a real health problem. Pretty cool, right? 🤖✨
+
 A simple Node.js service that sends hourly exercise reminders to help combat the negative effects of prolonged sitting.
 
 ## Why This Was Made
