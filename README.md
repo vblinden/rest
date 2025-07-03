@@ -44,41 +44,10 @@ These exercises are designed to be quick, require no equipment, and can be done 
 
 3. Configure your notification services and schedule by editing `settings.json`:
    
-   ### For ntfy:
-   ```json
-   {
-     "services": {
-       "ntfy": {
-         "enabled": true,
-         "url": "https://your-ntfy-server.com/your-topic"
-       }
-     },
-     "schedule": {
-       "activeDays": [1, 2, 3, 4, 5],
-       "startHour": 9,
-       "endHour": 17
-     }
-   }
-   ```
-
-   ### For Pushover:
-   ```json
-   {
-     "services": {
-       "pushover": {
-         "enabled": true,
-         "token": "your_app_token_here",
-         "user": "your_user_key_here"
-       }
-     },
-     "schedule": {
-       "activeDays": [1, 2, 3, 4, 5],
-       "startHour": 9,
-       "endHour": 17
-     }
-   }
-   ```
-
+   ### Service Configuration:
+   - **For ntfy:** Set `services.ntfy.enabled` to `true` and configure the `url`
+   - **For Pushover:** Set `services.pushover.enabled` to `true` and add your `token` and `user` key
+   
    **Tip:** Getting Pushover credentials:
    - Get your app token from https://pushover.net/apps
    - Get your user key from your Pushover dashboard
