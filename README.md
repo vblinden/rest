@@ -79,10 +79,9 @@ These exercises are designed to be quick, require no equipment, and can be done 
    }
    ```
 
-   > [!TIP]  
-   > **Getting Pushover credentials:**  
-   > - Get your app token from https://pushover.net/apps  
-   > - Get your user key from your Pushover dashboard
+   **Tip:** Getting Pushover credentials:
+   - Get your app token from https://pushover.net/apps
+   - Get your user key from your Pushover dashboard
 
    You can enable both services simultaneously or use just one.
 
@@ -91,8 +90,7 @@ These exercises are designed to be quick, require no equipment, and can be done 
    - **startHour**: Hour to start sending notifications (24-hour format, e.g., 9 for 9 AM)
    - **endHour**: Hour to stop sending notifications (24-hour format, e.g., 17 for 5 PM)
    
-   > [!NOTE]  
-   > If no schedule is configured, the service defaults to weekdays (Monday-Friday) from 9 AM to 5 PM.
+   **Note:** If no schedule is configured, the service defaults to weekdays (Monday-Friday) from 9 AM to 5 PM.
 
 4. Run the service:
    ```bash
