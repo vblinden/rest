@@ -1,0 +1,13 @@
+{
+  "services": {
+    "ntfy": {
+      "enabled": true,
+      "url": "https://ntfy.vblinden.dev/rest"
+    },
+    "pushover": {
+      "enabled": false,
+      "token": "your_app_token_here",
+      "user": "your_user_key_here"
+    }
+  }
+}

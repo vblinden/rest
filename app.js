@@ -1,7 +1,33 @@
 const axios = require("axios");
 const cron = require("node-cron");
+const fs = require("fs");
+const path = require("path");
 
-const NTFY_URL = "https://ntfy.vblinden.dev/rest";
+function loadSettings() {
+  try {
+    const settingsPath = path.join(__dirname, "settings.json");
+    const settingsData = fs.readFileSync(settingsPath, "utf8");
+    return JSON.parse(settingsData);
+  } catch (error) {
+    console.error("Failed to load settings:", error.message);
+    console.log("Using default settings");
+    return {
+      services: {
+        ntfy: {
+          enabled: true,
+          url: "https://ntfy.vblinden.dev/rest"
+        },
+        pushover: {
+          enabled: false,
+          token: "",
+          user: ""
+        }
+      }
+    };
+  }
+}
+
+const settings = loadSettings();
 
 const exercises = [
   "10-15 bodyweight squats",
@@ -12,11 +38,11 @@ const exercises = [
   "5 neck rolls in each direction",
 ];
 
-async function sendExerciseReminder() {
+async function sendNtfyNotification(message) {
+  if (!settings.services.ntfy.enabled) return;
+  
   try {
-    const message = `Time for your hourly exercise break! 💪\n\n${exercises.map((exercise) => `• ${exercise}`).join("\n")}`;
-
-    await axios.post(NTFY_URL, message, {
+    await axios.post(settings.services.ntfy.url, message, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
         Title: "Exercise Reminder",
@@ -24,6 +50,42 @@ async function sendExerciseReminder() {
         Tags: "muscle,alarm_clock",
       },
     });
+    console.log("Ntfy notification sent successfully");
+  } catch (error) {
+    console.error("Failed to send ntfy notification:", error.message);
+  }
+}
+
+async function sendPushoverNotification(message) {
+  if (!settings.services.pushover.enabled) return;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append('token', settings.services.pushover.token);
+    formData.append('user', settings.services.pushover.user);
+    formData.append('message', message);
+    formData.append('title', 'Exercise Reminder');
+    formData.append('priority', '0');
+
+    await axios.post('https://api.pushover.net/1/messages.json', formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    console.log("Pushover notification sent successfully");
+  } catch (error) {
+    console.error("Failed to send pushover notification:", error.message);
+  }
+}
+
+async function sendExerciseReminder() {
+  try {
+    const message = `Time for your hourly exercise break! 💪\n\n${exercises.map((exercise) => `• ${exercise}`).join("\n")}`;
+
+    await Promise.all([
+      sendNtfyNotification(message),
+      sendPushoverNotification(message)
+    ]);
 
     console.log(`Exercise reminder sent at ${new Date().toLocaleString()}`);
   } catch (error) {

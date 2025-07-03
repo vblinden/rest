@@ -19,7 +19,7 @@ This service was created to solve that problem by sending gentle reminders every
 
 ## What It Does
 
-The service automatically sends push notifications via [ntfy](https://ntfy.sh/) every hour with a selection of simple desk exercises you can do right at your workspace:
+The service automatically sends push notifications via [ntfy](https://ntfy.sh/) or [Pushover](https://pushover.net/) every hour with a selection of simple desk exercises you can do right at your workspace:
 
 - 10-15 bodyweight squats
 - 10 push ups
@@ -37,7 +37,38 @@ These exercises are designed to be quick, require no equipment, and can be done 
    npm install
    ```
 
-2. Configure your ntfy endpoint by updating the `NTFY_URL` in `app.js`
+2. Configure your notification services by editing `settings.json`:
+   
+   ### For ntfy:
+   ```json
+   {
+     "services": {
+       "ntfy": {
+         "enabled": true,
+         "url": "https://your-ntfy-server.com/your-topic"
+       }
+     }
+   }
+   ```
+
+   ### For Pushover:
+   ```json
+   {
+     "services": {
+       "pushover": {
+         "enabled": true,
+         "token": "your_app_token_here",
+         "user": "your_user_key_here"
+       }
+     }
+   }
+   ```
+
+   **Getting Pushover credentials:**
+   - Get your app token from https://pushover.net/apps
+   - Get your user key from your Pushover dashboard
+
+   You can enable both services simultaneously or use just one.
 
 3. Run the service:
    ```bash
