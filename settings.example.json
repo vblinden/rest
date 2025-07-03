@@ -9,5 +9,10 @@
       "token": "your_app_token_here",
       "user": "your_user_key_here"
     }
+  },
+  "schedule": {
+    "activeDays": [1, 2, 3, 4, 5],
+    "startHour": 9,
+    "endHour": 17
   }
 }

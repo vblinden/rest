@@ -22,12 +22,30 @@ function loadSettings() {
           token: "",
           user: ""
         }
+      },
+      schedule: {
+        activeDays: [1, 2, 3, 4, 5],
+        startHour: 9,
+        endHour: 17
       }
     };
   }
 }
 
 const settings = loadSettings();
+
+function shouldSendNotification() {
+  const now = new Date();
+  const currentDay = now.getDay();
+  const currentHour = now.getHours();
+  
+  const schedule = settings.schedule || { activeDays: [1, 2, 3, 4, 5], startHour: 9, endHour: 17 };
+  
+  const isDayActive = schedule.activeDays.includes(currentDay);
+  const isTimeActive = currentHour >= schedule.startHour && currentHour < schedule.endHour;
+  
+  return isDayActive && isTimeActive;
+}
 
 const exercises = [
   "10-15 bodyweight squats",
@@ -80,6 +98,11 @@ async function sendPushoverNotification(message) {
 
 async function sendExerciseReminder() {
   try {
+    if (!shouldSendNotification()) {
+      console.log(`Skipping reminder - outside active schedule at ${new Date().toLocaleString()}`);
+      return;
+    }
+
     const message = `Time for your hourly exercise break! 💪\n\n${exercises.map((exercise) => `• ${exercise}`).join("\n")}`;
 
     await Promise.all([

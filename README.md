@@ -42,7 +42,7 @@ These exercises are designed to be quick, require no equipment, and can be done 
    cp settings.example.json settings.json
    ```
 
-3. Configure your notification services by editing `settings.json`:
+3. Configure your notification services and schedule by editing `settings.json`:
    
    ### For ntfy:
    ```json
@@ -52,6 +52,11 @@ These exercises are designed to be quick, require no equipment, and can be done 
          "enabled": true,
          "url": "https://your-ntfy-server.com/your-topic"
        }
+     },
+     "schedule": {
+       "activeDays": [1, 2, 3, 4, 5],
+       "startHour": 9,
+       "endHour": 17
      }
    }
    ```
@@ -65,6 +70,11 @@ These exercises are designed to be quick, require no equipment, and can be done 
          "token": "your_app_token_here",
          "user": "your_user_key_here"
        }
+     },
+     "schedule": {
+       "activeDays": [1, 2, 3, 4, 5],
+       "startHour": 9,
+       "endHour": 17
      }
    }
    ```
@@ -75,6 +85,14 @@ These exercises are designed to be quick, require no equipment, and can be done 
    > - Get your user key from your Pushover dashboard
 
    You can enable both services simultaneously or use just one.
+
+   ### Schedule Configuration:
+   - **activeDays**: Array of days when notifications should be sent (0=Sunday, 1=Monday, ..., 6=Saturday)
+   - **startHour**: Hour to start sending notifications (24-hour format, e.g., 9 for 9 AM)
+   - **endHour**: Hour to stop sending notifications (24-hour format, e.g., 17 for 5 PM)
+   
+   > [!NOTE]
+   > If no schedule is configured, the service defaults to weekdays (Monday-Friday) from 9 AM to 5 PM.
 
 4. Run the service:
    ```bash
