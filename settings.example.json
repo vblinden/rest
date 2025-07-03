@@ -1,8 +1,8 @@
 {
   "services": {
     "ntfy": {
-      "enabled": true,
-      "url": "https://ntfy.vblinden.dev/rest"
+      "enabled": false,
+      "url": "https://your-ntfy-server.com/your-topic"
     },
     "pushover": {
       "enabled": false,
