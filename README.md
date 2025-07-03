@@ -37,7 +37,12 @@ These exercises are designed to be quick, require no equipment, and can be done 
    npm install
    ```
 
-2. Configure your notification services by editing `settings.json`:
+2. Create your settings file:
+   ```bash
+   cp settings.example.json settings.json
+   ```
+
+3. Configure your notification services by editing `settings.json`:
    
    ### For ntfy:
    ```json
@@ -70,7 +75,7 @@ These exercises are designed to be quick, require no equipment, and can be done 
 
    You can enable both services simultaneously or use just one.
 
-3. Run the service:
+4. Run the service:
    ```bash
    npm start
    ```
