@@ -83,7 +83,7 @@ async function sendPushoverNotification(message) {
     formData.append('user', settings.services.pushover.user);
     formData.append('message', message);
     formData.append('title', 'Exercise Reminder');
-    formData.append('priority', '0');
+    formData.append('priority', '1');
 
     await axios.post('https://api.pushover.net/1/messages.json', formData, {
       headers: {
